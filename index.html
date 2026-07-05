@@ -250,17 +250,49 @@
     padding: 4px 8px;
   }
 
-  .clear-all {
-    display: block;
-    margin: 8px auto 0;
-    background: none;
-    border: 1.5px solid var(--danger);
-    color: var(--danger);
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.85em;
+  .top-seller-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 6px;
+    border-bottom: 1px dashed var(--brown-light);
   }
+
+  .top-seller-row:last-child { border-bottom: none; }
+
+  .top-seller-row .rank {
+    font-size: 1.2em;
+    width: 28px;
+    text-align: center;
+  }
+
+  .top-seller-row .ts-name {
+    flex: 1;
+    font-weight: 600;
+    color: var(--brown-darkest);
+  }
+
+  .top-seller-row .ts-count {
+    font-weight: 700;
+    color: var(--accent-dark);
+    white-space: nowrap;
+  }
+
+  .close-shop-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px;
+    font-size: 1em;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(180deg, var(--danger), #7a2818);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(182, 65, 44, 0.4);
+  }
+
+  .close-shop-btn:active { transform: translateY(1px); }
 
   .summary-bar {
     position: sticky;
@@ -316,21 +348,26 @@
   </div>
 
   <div class="card">
+    <h2>📊 สรุปวันนี้ (สำหรับเจ้าของร้าน)</h2>
+    <div id="topSellers"></div>
+    <button class="close-shop-btn" id="closeShopBtn">🔒 ล้างออเดอร์ทั้งหมด (ปิดร้าน)</button>
+  </div>
+
+  <div class="card">
     <h2>รายการออเดอร์ที่บันทึกแล้ว</h2>
     <div id="orderHistory"></div>
-    <button class="clear-all" id="clearAllBtn" style="display:none;">ล้างรายการทั้งหมด</button>
   </div>
 
 </div>
 
 <script>
   const MENU = [
-    { id: "americano", name: "อเมริกาโน่", price: 55 },
-    { id: "latte", name: "ลาเต้", price: 65 },
-    { id: "cappuccino", name: "คาปูชิโน่", price: 65 },
-    { id: "thaitea", name: "ชาไทย", price: 50 },
-    { id: "cocoa", name: "โกโก้", price: 60 },
-    { id: "bananacake", name: "เค้กกล้วยหอม", price: 45 }
+    { id: "americano", name: "อเมริกาโน่", price: 55, unit: "แก้ว" },
+    { id: "latte", name: "ลาเต้", price: 65, unit: "แก้ว" },
+    { id: "cappuccino", name: "คาปูชิโน่", price: 65, unit: "แก้ว" },
+    { id: "thaitea", name: "ชาไทย", price: 50, unit: "แก้ว" },
+    { id: "cocoa", name: "โกโก้", price: 60, unit: "แก้ว" },
+    { id: "bananacake", name: "เค้กกล้วยหอม", price: 45, unit: "ชิ้น" }
   ];
 
   const STORAGE_KEY = "beans_coffee_orders";
@@ -340,8 +377,9 @@
   const menuListEl = document.getElementById("menuList");
   const totalPriceEl = document.getElementById("totalPrice");
   const orderHistoryEl = document.getElementById("orderHistory");
-  const clearAllBtn = document.getElementById("clearAllBtn");
   const summaryBarEl = document.getElementById("summaryBar");
+  const topSellersEl = document.getElementById("topSellers");
+  const closeShopBtn = document.getElementById("closeShopBtn");
 
   function todayKey() {
     const d = new Date();
@@ -408,6 +446,39 @@
     summaryBarEl.innerHTML = `ยอดขายวันนี้รวม <span class="summary-amount">${todayTotal.toLocaleString("th-TH")} บาท</span> · ${todayOrders.length} ออเดอร์`;
   }
 
+  function renderTopSellers() {
+    const orders = loadOrders();
+    const key = todayKey();
+    const todayOrders = orders.filter(o => o.dateKey === key);
+
+    const counts = {};
+    todayOrders.forEach(order => {
+      order.items.forEach(it => {
+        counts[it.name] = (counts[it.name] || 0) + it.qty;
+      });
+    });
+
+    const ranked = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+
+    if (ranked.length === 0) {
+      topSellersEl.innerHTML = '<div class="empty-msg">ยังไม่มีออเดอร์วันนี้</div>';
+      return;
+    }
+
+    const medals = ["🥇", "🥈", "🥉"];
+    topSellersEl.innerHTML = ranked.map(([name, count], idx) => {
+      const menuItem = MENU.find(m => m.name === name);
+      const unit = menuItem ? menuItem.unit : "รายการ";
+      return `
+        <div class="top-seller-row">
+          <span class="rank">${medals[idx]}</span>
+          <span class="ts-name">${escapeHtml(name)}</span>
+          <span class="ts-count">${count} ${unit}</span>
+        </div>
+      `;
+    }).join("");
+  }
+
   function escapeHtml(str) {
     const div = document.createElement("div");
     div.textContent = str;
@@ -418,10 +489,8 @@
     const orders = loadOrders();
     if (orders.length === 0) {
       orderHistoryEl.innerHTML = '<div class="empty-msg">ยังไม่มีออเดอร์ที่บันทึกไว้</div>';
-      clearAllBtn.style.display = "none";
       return;
     }
-    clearAllBtn.style.display = "block";
     orderHistoryEl.innerHTML = orders.slice().reverse().map(order => {
       const itemsHtml = order.items.map(it =>
         `<li>${escapeHtml(it.name)} x${it.qty} = ${(it.price * it.qty).toLocaleString("th-TH")} บาท</li>`
@@ -457,14 +526,21 @@
     saveOrders(remaining);
     renderHistory();
     updateSummary();
+    renderTopSellers();
   });
 
-  clearAllBtn.addEventListener("click", () => {
-    if (confirm("ต้องการล้างรายการออเดอร์ทั้งหมดหรือไม่?")) {
-      saveOrders([]);
-      renderHistory();
-      updateSummary();
+  closeShopBtn.addEventListener("click", () => {
+    const orders = loadOrders();
+    if (orders.length === 0) {
+      alert("ไม่มีออเดอร์ให้ล้าง");
+      return;
     }
+    if (!confirm(`ต้องการล้างออเดอร์ทั้งหมด ${orders.length} รายการ เพื่อปิดร้านใช่หรือไม่?`)) return;
+    if (!confirm("ยืนยันอีกครั้ง: ข้อมูลออเดอร์ทั้งหมดจะถูกลบถาวรและกู้คืนไม่ได้ ต้องการดำเนินการต่อหรือไม่?")) return;
+    saveOrders([]);
+    renderHistory();
+    updateSummary();
+    renderTopSellers();
   });
 
   document.getElementById("saveBtn").addEventListener("click", () => {
@@ -509,12 +585,14 @@
 
     renderHistory();
     updateSummary();
+    renderTopSellers();
   });
 
   renderMenu();
   updateTotal();
   renderHistory();
   updateSummary();
+  renderTopSellers();
 </script>
 
 </body>
