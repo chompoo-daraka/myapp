@@ -261,9 +261,28 @@
     cursor: pointer;
     font-size: 0.85em;
   }
+
+  .summary-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(180deg, var(--accent-dark), var(--brown-dark));
+    color: var(--cream-2);
+    text-align: center;
+    padding: 10px 14px;
+    font-weight: 700;
+    font-size: 0.98em;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .summary-bar .summary-amount {
+    color: #ffd9a0;
+  }
 </style>
 </head>
 <body>
+
+<div class="summary-bar" id="summaryBar">ยอดขายวันนี้รวม 0 บาท · 0 ออเดอร์</div>
 
 <header>
   <h1>☕ บีนส์</h1>
@@ -322,6 +341,13 @@
   const totalPriceEl = document.getElementById("totalPrice");
   const orderHistoryEl = document.getElementById("orderHistory");
   const clearAllBtn = document.getElementById("clearAllBtn");
+  const summaryBarEl = document.getElementById("summaryBar");
+
+  function todayKey() {
+    const d = new Date();
+    const pad = n => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  }
 
   function renderMenu() {
     menuListEl.innerHTML = MENU.map(item => `
@@ -374,6 +400,14 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
   }
 
+  function updateSummary() {
+    const orders = loadOrders();
+    const key = todayKey();
+    const todayOrders = orders.filter(o => o.dateKey === key);
+    const todayTotal = todayOrders.reduce((sum, o) => sum + o.total, 0);
+    summaryBarEl.innerHTML = `ยอดขายวันนี้รวม <span class="summary-amount">${todayTotal.toLocaleString("th-TH")} บาท</span> · ${todayOrders.length} ออเดอร์`;
+  }
+
   function escapeHtml(str) {
     const div = document.createElement("div");
     div.textContent = str;
@@ -413,16 +447,23 @@
     const delBtn = e.target.closest(".del-btn");
     if (!delBtn) return;
     const id = delBtn.dataset.delId;
-    let orders = loadOrders();
-    orders = orders.filter(o => String(o.id) !== String(id));
-    saveOrders(orders);
+    const orders = loadOrders();
+    const target = orders.find(o => String(o.id) === String(id));
+    const label = target
+      ? `ออเดอร์ของ ${target.customerName || "ลูกค้าไม่ระบุชื่อ"} (${target.total.toLocaleString("th-TH")} บาท)`
+      : "ออเดอร์นี้";
+    if (!confirm(`ต้องการลบ${label} ใช่หรือไม่?`)) return;
+    const remaining = orders.filter(o => String(o.id) !== String(id));
+    saveOrders(remaining);
     renderHistory();
+    updateSummary();
   });
 
   clearAllBtn.addEventListener("click", () => {
     if (confirm("ต้องการล้างรายการออเดอร์ทั้งหมดหรือไม่?")) {
       saveOrders([]);
       renderHistory();
+      updateSummary();
     }
   });
 
@@ -452,7 +493,8 @@
       customerPhone,
       items: selectedItems,
       total,
-      time: timeStr
+      time: timeStr,
+      dateKey: todayKey()
     };
 
     const orders = loadOrders();
@@ -466,11 +508,13 @@
     document.getElementById("customerPhone").value = "";
 
     renderHistory();
+    updateSummary();
   });
 
   renderMenu();
   updateTotal();
   renderHistory();
+  updateSummary();
 </script>
 
 </body>
