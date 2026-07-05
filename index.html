@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Bkk | สินเชื่อโฉนดที่ดิน กรุงเทพมหานคร</title>
+<style>
+  :root {
+    --gold: #c9a227;
+    --gold-dark: #a9841c;
+    --navy: #0f1b2d;
+    --navy-light: #1c2e47;
+    --text-light: #f5f2ea;
+    --text-muted: #b9c2d0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "Sarabun", "Noto Sans Thai", sans-serif;
+    background: var(--navy);
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    padding: 80px 20px 100px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+  header .logo {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--gold);
+  }
+  header .logo span { color: var(--text-light); }
+  header p.tagline {
+    margin-top: 16px;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+  }
+  header .cta {
+    margin-top: 32px;
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+  }
+  header .cta:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+  }
+  main {
+    max-width: 1100px;
+    margin: -50px auto 0;
+    padding: 0 20px 60px;
+  }
+  section.intro {
+    background: var(--navy-light);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-bottom: 60px;
+  }
+  section.intro h2 {
+    color: var(--gold);
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+  section.intro p {
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  h2.section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 40px;
+  }
+  h2.section-title span { color: var(--gold); }
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 70px;
+  }
+  .card {
+    background: var(--navy-light);
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+  }
+  .card .icon {
+    font-size: 2.6rem;
+    margin-bottom: 18px;
+  }
+  .card h3 {
+    color: var(--gold);
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+  .card p {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+  }
+  section.contact {
+    background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
+    border-radius: 16px;
+    padding: 50px 30px;
+    text-align: center;
+    border: 1px solid rgba(201, 162, 39, 0.3);
+  }
+  section.contact h2 {
+    color: var(--gold);
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+  section.contact p.sub {
+    color: var(--text-muted);
+    margin-bottom: 36px;
+  }
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+  .contact-item {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 24px 30px;
+    min-width: 220px;
+    border: 1px solid rgba(201, 162, 39, 0.25);
+  }
+  .contact-item .icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .contact-item .label { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 6px; }
+  .contact-item a {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none;
+  }
+  .contact-item a:hover { text-decoration: underline; }
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  footer .brand { color: var(--gold); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Money <span>Bkk</span></div>
+  <p class="tagline">บริการจัดหาสินเชื่อโดยมีโฉนดที่ดินในกรุงเทพมหานครเป็นหลักประกัน</p>
+  <a class="cta" href="tel:0972492645">โทรปรึกษาฟรี 097-249-2645</a>
+</header>
+
+<main>
+  <section class="intro">
+    <h2>เกี่ยวกับเรา</h2>
+    <p>
+      Money Bkk ให้บริการจัดหาสินเชื่อโดยใช้โฉนดที่ดินในเขตกรุงเทพมหานครเป็นหลักประกัน
+      อนุมัติไว วงเงินสูง ดอกเบี้ยเป็นธรรม ทีมงานมืออาชีพพร้อมให้คำปรึกษาทุกขั้นตอน
+    </p>
+  </section>
+
+  <h2 class="section-title">บริการ<span>เด่น</span>ของเรา</h2>
+  <div class="services">
+    <div class="card">
+      <div class="icon">🏠</div>
+      <h3>สินเชื่อจำนองโฉนดที่ดิน</h3>
+      <p>นำโฉนดที่ดินมาจำนองเพื่อขอสินเชื่อ ได้วงเงินสูงตามมูลค่าหลักประกัน โดยไม่ต้องโอนกรรมสิทธิ์ ยังคงเป็นเจ้าของที่ดินเช่นเดิม</p>
+    </div>
+    <div class="card">
+      <div class="icon">📄</div>
+      <h3>สินเชื่อขายฝากที่ดิน/บ้าน</h3>
+      <p>บริการขายฝากที่ดินหรือบ้าน อนุมัติรวดเร็ว เงื่อนไขยืดหยุ่น พร้อมสิทธิ์ไถ่ถอนคืนตามระยะเวลาที่ตกลง</p>
+    </div>
+    <div class="card">
+      <div class="icon">💼</div>
+      <h3>สินเชื่อสำหรับเจ้าของกิจการ/SME</h3>
+      <p>เสริมสภาพคล่องให้ธุรกิจ โดยใช้โฉนดที่ดินค้ำประกัน เหมาะสำหรับผู้ประกอบการที่ต้องการเงินทุนหมุนเวียน</p>
+    </div>
+  </div>
+
+  <section class="contact">
+    <h2>ช่องทางติดต่อ</h2>
+    <p class="sub">พร้อมให้คำปรึกษาและประเมินวงเงินเบื้องต้นฟรี ไม่มีค่าใช้จ่าย</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="icon">📞</div>
+        <div class="label">โทรศัพท์</div>
+        <a href="tel:0972492645">097-249-2645</a>
+      </div>
+      <div class="contact-item">
+        <div class="icon">💬</div>
+        <div class="label">LINE</div>
+        <a href="https://line.me/ti/p/@moneybkk" target="_blank" rel="noopener">@moneybkk</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2026 <span class="brand">Money Bkk</span> — บริการจัดหาสินเชื่อโฉนดที่ดิน กรุงเทพมหานคร
+</footer>
+
+</body>
+</html>
