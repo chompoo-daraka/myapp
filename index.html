@@ -3,221 +3,475 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Money Bkk | สินเชื่อโฉนดที่ดิน กรุงเทพมหานคร</title>
+<title>บีนส์ | จดออเดอร์</title>
 <style>
   :root {
-    --gold: #c9a227;
-    --gold-dark: #a9841c;
-    --navy: #0f1b2d;
-    --navy-light: #1c2e47;
-    --text-light: #f5f2ea;
-    --text-muted: #b9c2d0;
+    --brown-darkest: #3b2418;
+    --brown-dark: #5c3a28;
+    --brown: #7b4b32;
+    --brown-mid: #a9724f;
+    --brown-light: #d9b48f;
+    --cream: #f7ede1;
+    --cream-2: #fffaf3;
+    --accent: #c1793a;
+    --accent-dark: #8f5a26;
+    --danger: #b6412c;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  * { box-sizing: border-box; }
+
   body {
-    font-family: "Segoe UI", "Sarabun", "Noto Sans Thai", sans-serif;
-    background: var(--navy);
-    color: var(--text-light);
-    line-height: 1.6;
+    margin: 0;
+    font-family: "Segoe UI", "Sarabun", "Tahoma", sans-serif;
+    background: linear-gradient(180deg, var(--brown-darkest), var(--brown-dark) 40%, var(--cream) 40%);
+    background-attachment: fixed;
+    color: var(--brown-darkest);
+    padding-bottom: 40px;
   }
+
   header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-    padding: 80px 20px 100px;
     text-align: center;
-    border-bottom: 3px solid var(--gold);
+    padding: 28px 16px 18px;
+    color: var(--cream-2);
   }
-  header .logo {
-    font-size: 2.8rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    color: var(--gold);
+
+  header h1 {
+    margin: 0;
+    font-size: 2.1em;
+    letter-spacing: 2px;
   }
-  header .logo span { color: var(--text-light); }
-  header p.tagline {
-    margin-top: 16px;
-    font-size: 1.2rem;
-    color: var(--text-muted);
+
+  header p {
+    margin: 6px 0 0;
+    color: var(--brown-light);
+    font-size: 0.95em;
   }
-  header .cta {
-    margin-top: 32px;
-    display: inline-block;
-    background: var(--gold);
-    color: var(--navy);
-    font-weight: 700;
-    padding: 14px 36px;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: transform 0.2s, background 0.2s;
-  }
-  header .cta:hover {
-    background: var(--gold-dark);
-    transform: translateY(-2px);
-  }
-  main {
-    max-width: 1100px;
-    margin: -50px auto 0;
-    padding: 0 20px 60px;
-  }
-  section.intro {
-    background: var(--navy-light);
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    margin-bottom: 60px;
-  }
-  section.intro h2 {
-    color: var(--gold);
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-  }
-  section.intro p {
-    color: var(--text-muted);
-    max-width: 700px;
+
+  .container {
+    max-width: 640px;
     margin: 0 auto;
+    padding: 0 14px;
   }
-  h2.section-title {
-    text-align: center;
-    font-size: 2rem;
-    color: var(--text-light);
-    margin-bottom: 40px;
-  }
-  h2.section-title span { color: var(--gold); }
-  .services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-bottom: 70px;
-  }
+
   .card {
-    background: var(--navy-light);
+    background: var(--cream-2);
     border-radius: 16px;
-    padding: 36px 28px;
-    text-align: center;
-    border: 1px solid rgba(201, 162, 39, 0.2);
-    transition: transform 0.25s, border-color 0.25s;
-  }
-  .card:hover {
-    transform: translateY(-6px);
-    border-color: var(--gold);
-  }
-  .card .icon {
-    font-size: 2.6rem;
+    box-shadow: 0 8px 24px rgba(59, 36, 24, 0.25);
+    padding: 18px;
     margin-bottom: 18px;
+    border: 1px solid var(--brown-light);
   }
-  .card h3 {
-    color: var(--gold);
-    font-size: 1.25rem;
-    margin-bottom: 14px;
+
+  .card h2 {
+    margin: 0 0 12px;
+    color: var(--brown-dark);
+    font-size: 1.15em;
+    border-bottom: 2px solid var(--brown-light);
+    padding-bottom: 8px;
   }
-  .card p {
-    color: var(--text-muted);
-    font-size: 0.98rem;
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 6px;
+    border-bottom: 1px dashed var(--brown-light);
   }
-  section.contact {
-    background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
-    border-radius: 16px;
-    padding: 50px 30px;
+
+  .menu-item:last-child { border-bottom: none; }
+
+  .menu-info {
+    flex: 1;
+  }
+
+  .menu-name {
+    font-weight: 600;
+    color: var(--brown-darkest);
+  }
+
+  .menu-price {
+    color: var(--brown-mid);
+    font-size: 0.9em;
+  }
+
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .qty-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: var(--brown);
+    color: white;
+    font-size: 1.2em;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .qty-btn:active { background: var(--brown-dark); }
+
+  .qty-value {
+    min-width: 26px;
     text-align: center;
-    border: 1px solid rgba(201, 162, 39, 0.3);
+    font-weight: 700;
+    font-size: 1.05em;
   }
-  section.contact h2 {
-    color: var(--gold);
-    font-size: 1.8rem;
+
+  .form-group {
     margin-bottom: 12px;
   }
-  section.contact p.sub {
-    color: var(--text-muted);
-    margin-bottom: 36px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: var(--brown-dark);
+    font-weight: 600;
   }
-  .contact-grid {
+
+  input[type="text"], input[type="tel"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid var(--brown-light);
+    border-radius: 10px;
+    font-size: 1em;
+    background: var(--cream);
+    color: var(--brown-darkest);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .total-row {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-  }
-  .contact-item {
-    background: var(--navy);
-    border-radius: 12px;
-    padding: 24px 30px;
-    min-width: 220px;
-    border: 1px solid rgba(201, 162, 39, 0.25);
-  }
-  .contact-item .icon { font-size: 1.8rem; margin-bottom: 10px; }
-  .contact-item .label { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 6px; }
-  .contact-item a {
-    color: var(--gold);
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3em;
     font-weight: 700;
-    font-size: 1.15rem;
-    text-decoration: none;
+    color: var(--brown-dark);
+    margin: 8px 0 16px;
+    padding: 12px;
+    background: var(--brown-light);
+    border-radius: 10px;
   }
-  .contact-item a:hover { text-decoration: underline; }
-  footer {
+
+  .total-row span:last-child {
+    color: var(--accent-dark);
+  }
+
+  .save-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(143, 90, 38, 0.4);
+  }
+
+  .save-btn:active { transform: translateY(1px); }
+
+  .empty-msg {
     text-align: center;
-    padding: 30px 20px;
-    color: var(--text-muted);
-    font-size: 0.85rem;
+    color: var(--brown-mid);
+    padding: 20px;
+    font-style: italic;
   }
-  footer .brand { color: var(--gold); font-weight: 700; }
+
+  .order-entry {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-left: 5px solid var(--accent);
+    position: relative;
+  }
+
+  .order-entry .order-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .order-entry .customer {
+    font-weight: 700;
+    color: var(--brown-darkest);
+  }
+
+  .order-entry .time {
+    font-size: 0.8em;
+    color: var(--brown-mid);
+  }
+
+  .order-entry .phone {
+    font-size: 0.85em;
+    color: var(--brown-mid);
+    margin: 2px 0 6px;
+  }
+
+  .order-entry ul {
+    margin: 4px 0;
+    padding-left: 18px;
+    font-size: 0.92em;
+  }
+
+  .order-entry .order-total {
+    margin-top: 6px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    text-align: right;
+  }
+
+  .del-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-size: 1em;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .clear-all {
+    display: block;
+    margin: 8px auto 0;
+    background: none;
+    border: 1.5px solid var(--danger);
+    color: var(--danger);
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85em;
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Money <span>Bkk</span></div>
-  <p class="tagline">บริการจัดหาสินเชื่อโดยมีโฉนดที่ดินในกรุงเทพมหานครเป็นหลักประกัน</p>
-  <a class="cta" href="tel:0972492645">โทรปรึกษาฟรี 097-249-2645</a>
+  <h1>☕ บีนส์</h1>
+  <p>ระบบจดออเดอร์ร้านกาแฟ</p>
 </header>
 
-<main>
-  <section class="intro">
-    <h2>เกี่ยวกับเรา</h2>
-    <p>
-      Money Bkk ให้บริการจัดหาสินเชื่อโดยใช้โฉนดที่ดินในเขตกรุงเทพมหานครเป็นหลักประกัน
-      อนุมัติไว วงเงินสูง ดอกเบี้ยเป็นธรรม ทีมงานมืออาชีพพร้อมให้คำปรึกษาทุกขั้นตอน
-    </p>
-  </section>
+<div class="container">
 
-  <h2 class="section-title">บริการ<span>เด่น</span>ของเรา</h2>
-  <div class="services">
-    <div class="card">
-      <div class="icon">🏠</div>
-      <h3>สินเชื่อจำนองโฉนดที่ดิน</h3>
-      <p>นำโฉนดที่ดินมาจำนองเพื่อขอสินเชื่อ ได้วงเงินสูงตามมูลค่าหลักประกัน โดยไม่ต้องโอนกรรมสิทธิ์ ยังคงเป็นเจ้าของที่ดินเช่นเดิม</p>
-    </div>
-    <div class="card">
-      <div class="icon">📄</div>
-      <h3>สินเชื่อขายฝากที่ดิน/บ้าน</h3>
-      <p>บริการขายฝากที่ดินหรือบ้าน อนุมัติรวดเร็ว เงื่อนไขยืดหยุ่น พร้อมสิทธิ์ไถ่ถอนคืนตามระยะเวลาที่ตกลง</p>
-    </div>
-    <div class="card">
-      <div class="icon">💼</div>
-      <h3>สินเชื่อสำหรับเจ้าของกิจการ/SME</h3>
-      <p>เสริมสภาพคล่องให้ธุรกิจ โดยใช้โฉนดที่ดินค้ำประกัน เหมาะสำหรับผู้ประกอบการที่ต้องการเงินทุนหมุนเวียน</p>
-    </div>
+  <div class="card">
+    <h2>เมนู</h2>
+    <div id="menuList"></div>
   </div>
 
-  <section class="contact">
-    <h2>ช่องทางติดต่อ</h2>
-    <p class="sub">พร้อมให้คำปรึกษาและประเมินวงเงินเบื้องต้นฟรี ไม่มีค่าใช้จ่าย</p>
-    <div class="contact-grid">
-      <div class="contact-item">
-        <div class="icon">📞</div>
-        <div class="label">โทรศัพท์</div>
-        <a href="tel:0972492645">097-249-2645</a>
-      </div>
-      <div class="contact-item">
-        <div class="icon">💬</div>
-        <div class="label">LINE</div>
-        <a href="https://line.me/ti/p/@moneybkk" target="_blank" rel="noopener">@moneybkk</a>
-      </div>
+  <div class="card">
+    <h2>ข้อมูลลูกค้า</h2>
+    <div class="form-group">
+      <label for="customerName">ชื่อลูกค้า</label>
+      <input type="text" id="customerName" placeholder="เช่น คุณสมชาย">
     </div>
-  </section>
-</main>
+    <div class="form-group">
+      <label for="customerPhone">เบอร์โทร</label>
+      <input type="tel" id="customerPhone" placeholder="เช่น 081-234-5678">
+    </div>
 
-<footer>
-  &copy; 2026 <span class="brand">Money Bkk</span> — บริการจัดหาสินเชื่อโฉนดที่ดิน กรุงเทพมหานคร
-</footer>
+    <div class="total-row">
+      <span>ยอดรวม</span>
+      <span id="totalPrice">0 บาท</span>
+    </div>
+
+    <button class="save-btn" id="saveBtn">บันทึกออเดอร์</button>
+  </div>
+
+  <div class="card">
+    <h2>รายการออเดอร์ที่บันทึกแล้ว</h2>
+    <div id="orderHistory"></div>
+    <button class="clear-all" id="clearAllBtn" style="display:none;">ล้างรายการทั้งหมด</button>
+  </div>
+
+</div>
+
+<script>
+  const MENU = [
+    { id: "americano", name: "อเมริกาโน่", price: 55 },
+    { id: "latte", name: "ลาเต้", price: 65 },
+    { id: "cappuccino", name: "คาปูชิโน่", price: 65 },
+    { id: "thaitea", name: "ชาไทย", price: 50 },
+    { id: "cocoa", name: "โกโก้", price: 60 },
+    { id: "bananacake", name: "เค้กกล้วยหอม", price: 45 }
+  ];
+
+  const STORAGE_KEY = "beans_coffee_orders";
+  const qty = {};
+  MENU.forEach(item => qty[item.id] = 0);
+
+  const menuListEl = document.getElementById("menuList");
+  const totalPriceEl = document.getElementById("totalPrice");
+  const orderHistoryEl = document.getElementById("orderHistory");
+  const clearAllBtn = document.getElementById("clearAllBtn");
+
+  function renderMenu() {
+    menuListEl.innerHTML = MENU.map(item => `
+      <div class="menu-item">
+        <div class="menu-info">
+          <div class="menu-name">${item.name}</div>
+          <div class="menu-price">${item.price} บาท</div>
+        </div>
+        <div class="qty-control">
+          <button type="button" class="qty-btn" data-action="dec" data-id="${item.id}">−</button>
+          <span class="qty-value" id="qty-${item.id}">${qty[item.id]}</span>
+          <button type="button" class="qty-btn" data-action="inc" data-id="${item.id}">+</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function updateTotal() {
+    let total = 0;
+    MENU.forEach(item => {
+      total += item.price * qty[item.id];
+    });
+    totalPriceEl.textContent = total.toLocaleString("th-TH") + " บาท";
+    return total;
+  }
+
+  menuListEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".qty-btn");
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.action === "inc") {
+      qty[id]++;
+    } else if (btn.dataset.action === "dec") {
+      qty[id] = Math.max(0, qty[id] - 1);
+    }
+    document.getElementById("qty-" + id).textContent = qty[id];
+    updateTotal();
+  });
+
+  function loadOrders() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function saveOrders(orders) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function renderHistory() {
+    const orders = loadOrders();
+    if (orders.length === 0) {
+      orderHistoryEl.innerHTML = '<div class="empty-msg">ยังไม่มีออเดอร์ที่บันทึกไว้</div>';
+      clearAllBtn.style.display = "none";
+      return;
+    }
+    clearAllBtn.style.display = "block";
+    orderHistoryEl.innerHTML = orders.slice().reverse().map(order => {
+      const itemsHtml = order.items.map(it =>
+        `<li>${escapeHtml(it.name)} x${it.qty} = ${(it.price * it.qty).toLocaleString("th-TH")} บาท</li>`
+      ).join("");
+      const nameDisplay = order.customerName ? escapeHtml(order.customerName) : "ลูกค้าไม่ระบุชื่อ";
+      const phoneDisplay = order.customerPhone ? `📞 ${escapeHtml(order.customerPhone)}` : "";
+      return `
+        <div class="order-entry" data-order-id="${order.id}">
+          <button class="del-btn" data-del-id="${order.id}" title="ลบรายการนี้">✕</button>
+          <div class="order-head">
+            <span class="customer">${nameDisplay}</span>
+            <span class="time">${escapeHtml(order.time)}</span>
+          </div>
+          <div class="phone">${phoneDisplay}</div>
+          <ul>${itemsHtml}</ul>
+          <div class="order-total">รวม ${order.total.toLocaleString("th-TH")} บาท</div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  orderHistoryEl.addEventListener("click", (e) => {
+    const delBtn = e.target.closest(".del-btn");
+    if (!delBtn) return;
+    const id = delBtn.dataset.delId;
+    let orders = loadOrders();
+    orders = orders.filter(o => String(o.id) !== String(id));
+    saveOrders(orders);
+    renderHistory();
+  });
+
+  clearAllBtn.addEventListener("click", () => {
+    if (confirm("ต้องการล้างรายการออเดอร์ทั้งหมดหรือไม่?")) {
+      saveOrders([]);
+      renderHistory();
+    }
+  });
+
+  document.getElementById("saveBtn").addEventListener("click", () => {
+    const total = updateTotal();
+    const selectedItems = MENU
+      .filter(item => qty[item.id] > 0)
+      .map(item => ({ name: item.name, price: item.price, qty: qty[item.id] }));
+
+    if (selectedItems.length === 0) {
+      alert("กรุณาเลือกเมนูอย่างน้อย 1 รายการ");
+      return;
+    }
+
+    const customerName = document.getElementById("customerName").value.trim();
+    const customerPhone = document.getElementById("customerPhone").value.trim();
+
+    const now = new Date();
+    const timeStr = now.toLocaleString("th-TH", {
+      day: "2-digit", month: "2-digit", year: "numeric",
+      hour: "2-digit", minute: "2-digit"
+    });
+
+    const order = {
+      id: Date.now(),
+      customerName,
+      customerPhone,
+      items: selectedItems,
+      total,
+      time: timeStr
+    };
+
+    const orders = loadOrders();
+    orders.push(order);
+    saveOrders(orders);
+
+    MENU.forEach(item => qty[item.id] = 0);
+    renderMenu();
+    updateTotal();
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerPhone").value = "";
+
+    renderHistory();
+  });
+
+  renderMenu();
+  updateTotal();
+  renderHistory();
+</script>
 
 </body>
 </html>
